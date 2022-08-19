@@ -30,13 +30,11 @@
         <nav class="navbar navbar-dark bg-dark">
 
           <a class="navbar-brand" href="../../salir.php">Salir</a>
-          <a class="navbar-brand" href="../../salir.php">Embarcados</a>
-          <a class="navbar-brand" href="../../salir.php">Desembarcados</a>
+           <a class="navbar-brand" href="administracion/embarcados.php">Embarcados</a> 
+           <a class="navbar-brand" href="administracion/desembarcados.php">Desembarcados</a> 
           <a class="navbar-brand" href="administracion/actual.php">Actuales</a>
-          <a class="navbar-brand" href="../../salir.php">Rendimiento</a>
+          <a class="navbar-brand" href="rendimiento.php">Rendimiento</a>
           <a class="navbar-brand"  href="agregar_cont.php" >Subir documento</a>
-          <a class="navbar-brand"  href="../agregar_cont.php">Embarcar</a>
-          <a class="navbar-brand"  href="../agregar_cont.php">Desembarcar</a>
 
         </nav>
   </div>
@@ -125,7 +123,7 @@
         </form>
         
         <form action="eliminar.php"method="POST" enctype="multipart/from-data" id="filesForm">
-        <button type="submit"  class="btn btn-primary form-control" >Ingresar Nuevo Buque</button>
+        <button type="submit"  class="btn btn-primary form-control" >Eliminar buque actual</button>
         </form>
     </div>
   </div>
@@ -151,23 +149,34 @@
             contentType: false,
             success: function(data)
             {
-                alert('Registros Agregados!');
+                alert('Se han cargado nuevos contenedores');
+                window.location.reload();
             }
         });
     }
 
 </script>
 
+
+
 <script type="text/javascript">
-    $(document).ready( function () {
-        $('#tabla').DataTable({
-
-        scrollY: '550px',
+$(document).ready(function () {
+    $('#tabla').DataTable({
+        language: {
+            lengthMenu: 'Mostrando _MENU_ Contenedores por pagina',
+            zeroRecords: 'Actualmente no existe ningun contenedor',
+            info: 'Mostrando pagina _PAGE_ de _PAGES_',
+            infoEmpty: 'Actualmente no existe ningun contenedor',
+            //infoFiltered: '(filtered from _MAX_ total records)',
+            sSearch: 'Buscar Contenedor:',
+            sPrevious: 'Anterior',
+            sNext: 'Siguiente'
+        },
+        scrollY: '500px',
         scrollCollapse: true,
-        paging: false,
-
-        });
-    } );
+        paging: true,
+    });
+});
 </script>
 
 

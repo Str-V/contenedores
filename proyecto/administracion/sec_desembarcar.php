@@ -24,14 +24,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actuales</title>
+    <title>Desembarcar</title>
 
 
 
   <div class="col">
-      <form method="POST" action="../../salir.php">
-        <button type="submit"class="btn btn-primary">Salir </button>
-      </form>
+     
 
         <nav class="navbar navbar-dark bg-dark">
 
@@ -39,7 +37,7 @@
           <a class="navbar-brand" href="embarcados.php">Embarcados</a>
           <a class="navbar-brand" href="desembarcados.php">Desembarcados</a>
           <a class="navbar-brand" href="actual.php">Actuales</a>
-          <a class="navbar-brand" href="../../salir.php">Rendimiento</a>
+          <a class="navbar-brand" href="../rendimiento.php">Rendimiento</a>
           
         </nav>
 

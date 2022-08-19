@@ -2,7 +2,7 @@
      session_start();
     
     
-   if(isset($_SESSION['valido']) || isset($_SESSION['p_valido'])){
+   if(isset($_SESSION['valido']) || isset($_SESSION['p_valido']) ){
 
     echo "Bienvenido";
    }else{
@@ -10,8 +10,9 @@
     
    }
 
-    include("../conexion.php");
-    $sql="SELECT * from contenedores where situacion='embarcado'";
+    include("conexion.php");
+    $sql="SELECT nombre, descrp, fecha_mod,situacion,cant_dias_trab from trabajador t, roles ro, tipo ti,  contenedores c, rendimiento r where  t.rut=c.rut and ro.id_t=ti.id_t and ro.rut=t.rut and t.rut=r.rut 
+    /*and  situacion is null*/";
     $query=mysqli_query($conexion,$sql);
   ?>
 
@@ -26,30 +27,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actuales</title>
 
-  
-    <div class="col">
-      
+
+
+  <div class="col">
+     
 
         <nav class="navbar navbar-dark bg-dark">
 
           <a class="navbar-brand" href="../../salir.php">Salir</a>
-          <a class="navbar-brand" href="embarcados.php">Embarcados</a>
-          <a class="navbar-brand" href="desembarcados.php">Desembarcados</a>
-          <a class="navbar-brand" href="actual.php">Actuales</a>
+          <a class="navbar-brand" href="administracion/embarcados.php">Embarcados</a>
+          <a class="navbar-brand" href="administracion/desembarcados.php">Desembarcados</a>
+          <a class="navbar-brand" href="administracion/actual.php">Actuales</a>
           <a class="navbar-brand" href="../rendimiento.php">Rendimiento</a>
-          <a class="navbar-brand" href="sec_embarcar.php">Embarcar</a>
           
         </nav>
 
   </div>
     
- 
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="http://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+ 
 
   </head>
   <body>
@@ -62,18 +65,12 @@
           <thead>
             <tr>
               
-              <th scope="col">No</th>
-              <th scope="col">VGM</th>
-              <th scope="col">CNTR</th>
-              <th scope="col">OPR</th>
-              <th scope="col">POR</th>
-              <th scope="col">POL</th>
-              <th scope="col">POD</th>
-              <th scope="col">FPOD</th>
-              <th scope="col">SzTp</th>
-              <th scope="col">Wgt</th>
-              <th scope="col">FE</th>
-              <th scope="col">Temp</th>
+              <th scope="col">Nombre Trabajador</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Fecha/Hora ultima accion</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Cantidad</th>
+              
               <?php  //<th scope="col">Seleccionar</th>?> 
              
             </tr>
@@ -85,18 +82,11 @@
                   ?>
                       
                       <tr>
-                      <th><?php  echo $row['Num'] ?></th>
-                      <th><?php  echo $row['VGM'] ?></th>
-                      <th><?php  echo $row['CNTR'] ?></th>
-                      <th><?php  echo $row['OPR'] ?></th>
-                      <th><?php  echo $row['POR'] ?></th>
-                      <th><?php  echo $row['POL'] ?></th>
-                      <th><?php  echo $row['POD'] ?></th>
-                      <th><?php  echo $row['FPOD'] ?></th>
-                      <th><?php  echo $row['SzTp'] ?></th>
-                      <th><?php  echo $row['Wgt'] ?></th>
-                      <th><?php  echo $row['FE'] ?></th>
-                      <th><?php  echo $row['Temp'] ?></th>
+                      <th><?php  echo $row['nombre'] ?></th>
+                      <th><?php  echo $row['descrp'] ?></th>
+                      <th><?php  echo $row['fecha_mod'] ?></th>
+                      <th><?php  echo $row['situacion'] ?></th>
+                      <th><?php  echo $row['cant_dias_trab'] ?></th>
                       </tr>
                       <?php 
                       }
@@ -116,6 +106,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="http:////cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
+  
+  <!-- Para desplegar navbar -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 
   </body>
   
@@ -124,23 +118,38 @@
 
 
 
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#tabla').DataTable({
+          "oLanguage": {
+            "sInfo": "Got a total of _TOTAL_ entries to show (_START_ to _END_)"
+            }
+        scrollY: '700px',
+        scrollCollapse: true,
+        paging: false,
+
+        });
+    } ); 
+</script>
+
 
 <script type="text/javascript">
 $(document).ready(function () {
     $('#tabla').DataTable({
         language: {
-            lengthMenu: 'Mostrando _MENU_ Contenedores por pagina',
-            zeroRecords: 'No existe ningun contenedor embarcado',
-            info: 'Mostrando pagina _PAGE_ de _PAGES_',
+            lengthMenu: 'Mostrando _MENU_ Registros por pagina',
+            zeroRecords: 'Actualmente no existe ningun contenedor',
+          //  info: 'Mostrando pagina _PAGE_ de _PAGES_',
             infoEmpty: 'Actualmente no existe ningun contenedor',
             //infoFiltered: '(filtered from _MAX_ total records)',
             sSearch: 'Buscar Contenedor:',
             sPrevious: 'Anterior',
-            sNext: 'Siguiente'
+            sNext: 'Siguiente',
         },
-        scrollY: '500px',
-        scrollCollapse: true,
-        paging: true,
+
+            scrollY: '800px',
+            scrollCollapse: true,
+            paging: false,
     });
 });
 </script>

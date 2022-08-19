@@ -28,11 +28,14 @@
       </div>
       <div class="form-group">
         <label for="password">Clave</label>
-        <input type="password" name="rut" id="password" class="form-control">
-
+        <input type="password" name="rut" id="rut" class="form-control">
+        <?php $rut=$_POST['rut']; 
+        global $rut;?>
 
       </div>
-      <button type="submit" class="btn btn-primary">Ingresar</button>
+      <button type="submit" id= "" class="btn btn-primary">Ingresar</button>
+
+      
     </form>
   </div>
 </div>

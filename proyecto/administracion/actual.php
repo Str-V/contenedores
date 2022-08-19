@@ -3,7 +3,7 @@
      session_start();
     
     
-   if(isset($_SESSION['valido'])){
+   if(isset($_SESSION['valido']) || isset($_SESSION['p_valido'])){
 
     echo "Bienvenido";
    }else{
@@ -14,6 +14,8 @@
     include("../conexion.php");
     $sql="SELECT * from contenedores where situacion is null";
     $query=mysqli_query($conexion,$sql);
+
+   $rut=$_SESSION['valido'];
   ?>
 
 
@@ -44,7 +46,7 @@
           <a class="navbar-brand" href="embarcados.php">Embarcados</a>
           <a class="navbar-brand" href="desembarcados.php">Desembarcados</a>
           <a class="navbar-brand" href="actual.php">Actuales</a>
-          <a class="navbar-brand" href="../../salir.php">Rendimiento</a>
+          <a class="navbar-brand" href="../rendimiento.php">Rendimiento</a>
           <a class="navbar-brand"  href="../agregar_cont.php" disabled="disabled" >Subir documento</a>
           <a class="navbar-brand"  href="sec_embarcar.php">Embarcar</a>
           <a class="navbar-brand"  href="sec_desembarcar.php">Desembarcar</a>
@@ -149,7 +151,7 @@
 
 
 <script type="text/javascript">
-    $(document).ready( function () {
+    /*$(document).ready( function () {
         $('#tabla').DataTable({
 
         scrollY: '800px',
@@ -157,5 +159,28 @@
         paging: false,
 
         });
-    } );
+    } ); */
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#tabla').DataTable({
+        language: {
+            lengthMenu: 'Mostrando _MENU_ Registros por pagina',
+            zeroRecords: 'Actualmente no existe ningun contenedor',
+            info: 'Mostrando pagina _PAGE_ de _PAGES_',
+            infoEmpty: 'Actualmente no existe ningun contenedor',
+            //infoFiltered: '(filtered from _MAX_ total records)',
+            sSearch: 'Buscar Contenedor:',
+            sPrevious: 'Anterior',
+            sNext: 'Siguiente',
+           
+        },
+
+            scrollY: '500px',
+            scrollCollapse: true,
+            paging: false,
+            info:false,
+    });
+});
 </script>

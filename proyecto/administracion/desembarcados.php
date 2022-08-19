@@ -3,7 +3,7 @@
      session_start();
     
     
-   if(isset($_SESSION['valido'])){
+   if(isset($_SESSION['valido']) || isset($_SESSION['p_valido'])){
 
     echo "Bienvenido";
    }else{
@@ -29,9 +29,7 @@
 
   
     <div class="col">
-      <form method="POST" action="../../salir.php">
-        <button type="submit"class="btn btn-primary">Salir </button>
-      </form>
+      
 
         <nav class="navbar navbar-dark bg-dark">
 
@@ -39,7 +37,7 @@
           <a class="navbar-brand" href="embarcados.php">Embarcados</a>
           <a class="navbar-brand" href="../../salir.php">Desembarcados</a>
           <a class="navbar-brand" href="actual.php">Actuales</a>
-          <a class="navbar-brand" href="../../salir.php">Rendimiento</a>
+          <a class="navbar-brand" href="../rendimiento.php">Rendimiento</a>
           
         </nav>
 
@@ -76,7 +74,7 @@
               <th scope="col">Wgt</th>
               <th scope="col">FE</th>
               <th scope="col">Temp</th>
-              <th scope="col"></th>
+              
              
              
             </tr>
@@ -100,7 +98,6 @@
                       <th><?php  echo $row['Wgt'] ?></th>
                       <th><?php  echo $row['FE'] ?></th>
                       <th><?php  echo $row['Temp'] ?></th>
-                      <th><a href="embarcar.php?id=<?php echo $row['Num']?>" class="btn btn-info"> Embarcar </tr>
                       </tr>
                       <?php 
                       }
@@ -129,13 +126,21 @@
 
 
 <script type="text/javascript">
-    $(document).ready( function () {
-        $('#tabla').DataTable({
-
+$(document).ready(function () {
+    $('#tabla').DataTable({
+        language: {
+            lengthMenu: 'Mostrando _MENU_ Contenedores por pagina',
+            zeroRecords: 'No existe ningun contenedor desembarcado',
+            info: 'Mostrando pagina _PAGE_ de _PAGES_',
+            infoEmpty: 'Actualmente no existe ningun contenedor',
+            //infoFiltered: '(filtered from _MAX_ total records)',
+            sSearch: 'Buscar Contenedor:',
+            sPrevious: 'Anterior',
+            sNext: 'Siguiente'
+        },
         scrollY: '500px',
         scrollCollapse: true,
-        paging: false,
-
-        });
-    } );
+        paging: true,
+    });
+});
 </script>
