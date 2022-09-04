@@ -23,13 +23,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Contenedor</title>
     <div class="col">
-    <form method="POST" action="../../salir.php">
-        <button type="submit"class="btn btn-primary">Salir </button>
-      </form>
+    
 
         <nav class="navbar navbar-dark bg-dark">
 
-          <a class="navbar-brand" href="../../salir.php">Salir</a>
+          <a class="navbar-brand" href="salir.php">Salir</a>
            <a class="navbar-brand" href="administracion/embarcados.php">Embarcados</a> 
            <a class="navbar-brand" href="administracion/desembarcados.php">Desembarcados</a> 
           <a class="navbar-brand" href="administracion/actual.php">Actuales</a>

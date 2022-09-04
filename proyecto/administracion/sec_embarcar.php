@@ -36,7 +36,7 @@
 
         <nav class="navbar navbar-dark bg-dark">
 
-          <a class="navbar-brand" href="../../salir.php">Salir</a>
+          <a class="navbar-brand" href="../salir.php">Salir</a>
           <a class="navbar-brand" href="embarcados.php">Embarcados</a>
           <a class="navbar-brand" href="desembarcados.php">Desembarcados</a>
           <a class="navbar-brand" href="actual.php">Actuales</a>

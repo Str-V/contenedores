@@ -11,9 +11,12 @@
    }
 
     include("conexion.php");
-    $sql="SELECT nombre, descrp, fecha_mod,situacion,cant_dias_trab from trabajador t, roles ro, tipo ti,  contenedores c, rendimiento r where  t.rut=c.rut and ro.id_t=ti.id_t and ro.rut=t.rut and t.rut=r.rut 
-    /*and  situacion is null*/";
+   $sql="SELECT nombre, descrp, fecha_mod,situacion,CNTR from trabajador t, roles ro, tipo ti,  contenedores c where  t.rut=c.rut and ro.id_t=ti.id_t and ro.rut=t.rut
+    /*and  situacion is null*/;";
     $query=mysqli_query($conexion,$sql);
+   
+    
+
   ?>
 
 
@@ -25,7 +28,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actuales</title>
+    <title>Rendimiento</title>
 
 
 
@@ -34,11 +37,11 @@
 
         <nav class="navbar navbar-dark bg-dark">
 
-          <a class="navbar-brand" href="../../salir.php">Salir</a>
+          <a class="navbar-brand" href="salir.php">Salir</a>
           <a class="navbar-brand" href="administracion/embarcados.php">Embarcados</a>
           <a class="navbar-brand" href="administracion/desembarcados.php">Desembarcados</a>
           <a class="navbar-brand" href="administracion/actual.php">Actuales</a>
-          <a class="navbar-brand" href="../rendimiento.php">Rendimiento</a>
+          <a class="navbar-brand" href="rendimiento.php">Rendimiento</a>
           
         </nav>
 
@@ -69,7 +72,7 @@
               <th scope="col">Rol</th>
               <th scope="col">Fecha/Hora ultima accion</th>
               <th scope="col">Estado</th>
-              <th scope="col">Cantidad</th>
+              <th scope="col">Contenedor</th>
               
               <?php  //<th scope="col">Seleccionar</th>?> 
              
@@ -86,7 +89,7 @@
                       <th><?php  echo $row['descrp'] ?></th>
                       <th><?php  echo $row['fecha_mod'] ?></th>
                       <th><?php  echo $row['situacion'] ?></th>
-                      <th><?php  echo $row['cant_dias_trab'] ?></th>
+                      <th><?php  echo $row['CNTR'] ?></th>
                       </tr>
                       <?php 
                       }
@@ -97,8 +100,111 @@
           </tbody>
         </table>
       </div>
+
+
+
+            <div class="col">
+
+                  <?php
+
+                $sql2="SELECT nombre,count(situacion) as numeros from trabajador t, contenedores c  where situacion = 'embarcado' and t.rut=c.rut group by t.nombre;";
+                $query2=mysqli_query($conexion,$sql2);
+                //$query2=mysqli_multi_query($conexion,$rend);
+                ?>
+
+                    <table class="table table-dark" id="tabla2">
+              <thead>
+                <tr>
+                  
+                  <th scope="col">Nombre Trabajador</th>
+                  <th scope="col">Cantidad de Contenedores Embarcados</th>
+
+                  <?php  //<th scope="col">Seleccionar</th>?> 
+                
+                </tr>
+              </thead>
+              <tbody>
+
+
+              <div class="card example-1 scrollbar-ripe-malinka">
+                      <?php 
+                      while($row1=mysqli_fetch_array($query2)){
+                      ?>
+                          
+                          <tr>
+                          <th><?php  echo $row1['nombre'] ?></th>
+                          <th><?php  echo $row1['numeros'] ?></th>
+                          </tr>
+                          <?php 
+                          }
+
+                        ?> 
+                  
+                </div>
+
+              </tbody>
+            </table>
+
+
+
+
+            </div>
+
+             
+
+
+
+          <div class="col">
+
+ <?php
+        $sql3="SELECT nombre,count(situacion) as numeros from trabajador t, contenedores c  where situacion = 'desembarcado' and t.rut=c.rut group by t.nombre;";
+        $query3=mysqli_query($conexion,$sql3);
+        ?>
+
+        <table class="table table-dark" id="tabla3">
+        <thead>
+        <tr>
+
+        <th scope="col">Nombre Trabajador</th>
+        <th scope="col">Cantidad de Contenedores Desembarcados</th>
+
+        <?php  //<th scope="col">Seleccionar</th>?> 
+
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <div class="card example-1 scrollbar-ripe-malinka">
+            <?php 
+            while($row2=mysqli_fetch_array($query3)){
+            ?>
+                
+                <tr>
+                <th><?php  echo $row2['nombre'] ?></th>
+                <th><?php  echo $row2['numeros'] ?></th>
+                </tr>
+                <?php 
+                }
+                //$query=mysqli_multi_query($conexion,$sql);
+              //  mysqli_query($sql2);
+              ?> 
+
+        </div>
+
+        </tbody>
+        
+        </table>
+      </div>
     </div>
   </div>
+
+
+
+
+
+
+
 
 
 
